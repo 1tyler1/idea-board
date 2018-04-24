@@ -11,25 +11,15 @@
   },
   "repository": {
     "type": "git",
-<<<<<<< HEAD
     "url": "git+https://github.com/1tyler1/idea-board.git"
-=======
-    "url": "git+https://github.com/danielpinoga/idea-board.git"
->>>>>>> 23a1d2b91560543f8428a8a74281fcd835ee5ace
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-<<<<<<< HEAD
     "url": "https://github.com/1tyler1/idea-board/issues"
   },
   "homepage": "https://github.com/1tyler1/idea-board#readme",
-=======
-    "url": "https://github.com/danielpinoga/idea-board/issues"
-  },
-  "homepage": "https://github.com/danielpinoga/idea-board#readme",
->>>>>>> 23a1d2b91560543f8428a8a74281fcd835ee5ace
   "dependencies": {
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
@@ -37,8 +27,4 @@
     "express": "^4.16.3",
     "mongoose": "^5.0.16"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 23a1d2b91560543f8428a8a74281fcd835ee5ace
