@@ -21,6 +21,6 @@ const IdeaModel = mongoose.model('Idea', IdeaSchema)
 
 // Export each model so they can be required elsewhere
 module.exports = {
-    UserModel: UserModel,
-    IdeaModel: IdeaModel
+    UserModel,
+    IdeaModel
 }
