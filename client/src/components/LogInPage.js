@@ -26,14 +26,8 @@ class LogIn extends Component {
     axios.post('/api/users', {
       user: this.state.user
     }).then((res) => {
-      this.setState({redirectToHome: true, createdUser: res.data})
+      this.setState({ redirectToHome: true, createdUser: res.data })
     })
-  }
-
-  handleChange = (e) => {
-    const user = {...this.state.user}
-    user[e.target.name] = e.target.value
-    this.setState({user})
   }
 
   handleSignUp = (e) => {
@@ -41,8 +35,13 @@ class LogIn extends Component {
     this.createUser()
   }
 
+  handleChange = (event) => {
+    const user = { ...this.state.user }
+    user[event.target.name] = event.target.value
+    this.setState({ user })
+  }
+
   render() {
-    console.log("Users in state at LogIn Render", this.state.users)
     const userLinks = this.state.users.map((user, i) => {
       return (
         <div key={i}>
@@ -62,17 +61,17 @@ class LogIn extends Component {
         <h3>Please Select an Existing User</h3>
         {userLinks}
         <h1>Sign-Up</h1>
-  <form onSubmit={this.handleSignUp}>
-    <div>
-      <label htmlFor="userName">User Name</label>
-      <input onChange={this.handleChange} name="userName" type="text" value={this.state.userName}/>
-    </div>
-    <div>
-      <label htmlFor="password">Password</label>
-      <input onChange={this.handleChange} name="password" type="text" value={this.state.password}/>
-    </div>
-  <button>Sign Up</button>
-</form>
+        <form onSubmit={this.handleSignUp}>
+          <div>
+            <label htmlFor="userName">User Name</label>
+            <input onChange={this.handleChange} name="userName" type="text" value={this.state.userName} />
+          </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <input onChange={this.handleChange} name="password" type="text" value={this.state.password} />
+          </div>
+          <button>Sign Up</button>
+        </form>
       </div>
     )
   }
