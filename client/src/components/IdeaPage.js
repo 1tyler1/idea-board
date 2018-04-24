@@ -26,6 +26,11 @@ class IdeaPage extends Component {
     }]
   }
 
+  componentDidMount(){
+    const userId = this.props.match.params.userId
+    console.log(userId)
+  }
+
   handleChange = (event) => {
     console.log(event)
   }
