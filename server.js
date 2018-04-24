@@ -22,7 +22,7 @@ app.get('/', (req,res) => {
 })
 
 const UsersController = require('./controllers/users')
-app.get('/api/users', UsersController)
+app.use('/api/users', UsersController)
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
