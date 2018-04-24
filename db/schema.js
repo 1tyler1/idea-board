@@ -16,7 +16,11 @@ const IdeaSchema = new Schema({
     default: "New Description"
   },
   created: {
+<<<<<<< HEAD
     type: String,
+=======
+    type: Date,
+>>>>>>> 23a1d2b91560543f8428a8a74281fcd835ee5ace
     required: true,
     default: new Date()
   }
