@@ -2,17 +2,18 @@ const mongoose = require ('mongoose')
 
 const schema = mongoose.schema
 
+const IdeaSchema = new Schema ({
+    Title: String,
+    Description: String,
+    Created: Date
+})
+
+
 const Userschema = new Schema ({
     Username: String,
     Password: String,
     Ideas:[IdeasSchema]
 
-})
-
-const IdeaSchema = new Schema ({
-    Title: String,
-    Description: String,
-    Created: Date
 })
 
 const UserModel = mongoose.model('User', UserSchema)
