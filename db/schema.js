@@ -1,26 +1,44 @@
-const mongoose = require ('mongoose')
+const mongoose = require('mongoose');
 
-const schema = mongoose.schema
+// First, we instantiate a namespace for our Schema constructor defined by mongoose.
+const Schema = mongoose.Schema
 
-const IdeaSchema = new Schema ({
-    Title: String,
-    Description: String,
-    Created: Date
+const IdeaSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
+    unique: true,
+    default: "New Title"
+  },
+  description: {
+    type: String,
+    required: true,
+    default: "New Description"
+  },
+  created: {
+    type: String,
+    required: true,
+    default: new Date()
+  }
 })
 
-
-const Userschema = new Schema ({
-    Username: String,
-    Password: String,
-    Ideas:[IdeasSchema]
-
+const UserSchema = new Schema({
+  userName: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  ideas: [IdeaSchema]
 })
 
-const UserModel = mongoose.model('User', UserSchema)
-const IdeaModel = mongoose.model('Idea', IdeaSchema)
+// Create models for each schema
+const User = mongoose.model('User', UserSchema)
+const Idea = mongoose.model('Idea', IdeaSchema)
 
 // Export each model so they can be required elsewhere
 module.exports = {
-    UserModel,
-    IdeaModel
+  User, Idea
 }
