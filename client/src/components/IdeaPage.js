@@ -2,15 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import styled from "styled-components"
 
-<<<<<<< HEAD
-
-// const B = styled.div`
-// display: flex;
-// align-self: center;
-// `
-
-=======
->>>>>>> 9891fc41b65bc0550557503d9462394051fea127
 const FormWrapper = styled.div`
   
   display: flex;
@@ -38,10 +29,6 @@ const IdeaContainer = styled.span`
 background-color:yellow;
 margin: 5px;
 `
-<<<<<<< HEAD
-=======
-
->>>>>>> 9891fc41b65bc0550557503d9462394051fea127
 class IdeaPage extends Component {
 
   state = {
@@ -83,48 +70,23 @@ class IdeaPage extends Component {
   render() {
     const ideas = this.state.ideas.map((idea, i) => {
       return (
-<<<<<<< HEAD
-        
-=======
->>>>>>> 9891fc41b65bc0550557503d9462394051fea127
         <FormWrapper key={i}>
           <input type="text" name="title" value={idea.title} onChange={this.handleChange} />
           <textarea name="description" value={idea.description} onChange={this.handleChange} />
           <button>Delete Idea</button>
         </FormWrapper>
-<<<<<<< HEAD
-        
-=======
->>>>>>> 9891fc41b65bc0550557503d9462394051fea127
       )
     })
 
     return (
       <div>
         <div>
-<<<<<<< HEAD
-         
-          <h1>
-            {this.state.user.userName}'s Idea Board
-          </h1>
-          
-          
-          <StyledButton>New Idea</StyledButton>
-        </div>
-        <div>
-          <IdeaContainer>
-          {ideas}
-          </IdeaContainer>
-
-        </div>
-=======
           <h1>{this.state.user.userName}'s Idea Board</h1>
           <StyledButton>New Idea</StyledButton>
         </div>
         <IdeaContainer>
           {ideas}
         </IdeaContainer>
->>>>>>> 9891fc41b65bc0550557503d9462394051fea127
       </div>
     )
   }
