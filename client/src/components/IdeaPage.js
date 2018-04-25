@@ -10,7 +10,8 @@ import styled from "styled-components"
 
 const FormWrapper = styled.div`
   
-  display: inline;z
+  display: flex;
+  flex-direction: column;
   
   border-radius: 3px;
   padding: 0.5rem 0;
@@ -25,10 +26,14 @@ const FormWrapper = styled.div`
   }
 `
 const StyledButton = styled.button`
+background-color: #123456;
+color: white;
     background-color: #123456;
     color: white;
 `
 const IdeaContainer = styled.span`
+background-color:yellow;
+margin: 5px;
 `
 class IdeaPage extends Component {
   state = {
