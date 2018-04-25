@@ -23,12 +23,11 @@ class LogIn extends Component {
   }
 
   createUser = () => {
-    axios.post('/api/users', { user: this.state.user })
-      .then((res) => {
-        const users = [...this.state.users]
-        users.push(res.data)
-        this.setState({ users })
-      })
+    axios.post('/api/users', {
+      user: [...this.state.user]
+    }).then((res) => {
+      this.setState({ redirectToHome: true, createdUser: res.data })
+    })
   }
 
   handleSignUp = (e) => {
