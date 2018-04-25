@@ -33,4 +33,21 @@ router.delete('/', (req, res) => {
     .catch(console.error)
 });
 
+router.patch('/:id', (req, res) => {
+    User.findById(req.params.userId).then((user) => {
+      const update = req.body.idea
+      const idea = user.ideas.id(req.params.id)
+      if (update.title) {
+        idea.title = update.title
+      }
+      if (update.description) {
+        idea.description = update.description
+      }
+      user.save().then((user) => {
+        user.ideas = user.ideas.reverse()
+        res.json(user)
+      })
+    })
+  })
+
 module.exports = router

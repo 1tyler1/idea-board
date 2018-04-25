@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import styled from "styled-components"
+import styled from 'styled-components'
 
 const FormWrapper = styled.div`
   
@@ -29,6 +29,7 @@ const IdeaContainer = styled.span`
 background-color:yellow;
 margin: 5px;
 `
+
 class IdeaPage extends Component {
 
   state = {
@@ -67,30 +68,57 @@ class IdeaPage extends Component {
       })
   }
 
-  createIdea = () => {
+  createNewIdea = () => {
     axios.post(`/api/users/${this.state.user._id}/ideas`)
-    .then(res => {
-      const newIdeas = [...this.state.ideas]
-      newIdeas.unshift(res.data) 
-      //This will add the new Idea to the beginning of the array
-      this.setState({ideas: newIdeas})
-    })
+      .then((res) => {
+        console.log("RESPONSE FROM NEW IDEA", res.data)
+      })
   }
 
   deleteIdea = (ideaId) => {
     axios.delete(`/api/users/${this.state.user._id}/ideas/${ideaId}`)
-      .then((res) => {
-        console.log(res)
+      .then((response) => {
+        console.log(response)
+      })
+  }
+
+  updateIdea = (idea, e) => {
+    axios.patch(`/api/users/${this.state.user.id}/ideas/${idea._id}`, {idea}).then(res => {
+      this.setState({ideas: res.data.ideas})
     })
-    
-  } 
+  }
+
+  handleChange = (changedIdea, event) => {
+    const ideas = [...this.state.ideas]
+    const newIdeas = ideas.map((idea) => {
+      if (idea._id === changedIdea._id) {
+        idea[event.target.name] = event.target.value
+      }
+      return idea
+    })
+    this.setState({ ideas: newIdeas })
+  }
+
   render() {
+    console.log("RENDERING", this.state.user)
     const ideas = this.state.ideas.map((idea, i) => {
       return (
         <FormWrapper key={i}>
-          <input type="text" name="title" value={idea.title} onChange={this.handleChange} />
-          <textarea name="description" value={idea.description} onChange={this.handleChange} />
-          <button onClick={this.deleteIdea}>Delete Idea</button>
+          <input
+            type="text"
+            name="title"
+            value={idea.title}
+            onChange={(event) => this.handleChange(idea, event)} />
+
+          <textarea
+            name="description"
+            value={idea.description}
+            onChange={(event) => this.handleChange(idea, event)} />
+
+          <button
+            onClick={() => { this.deleteIdea(idea._id) }}>
+            Delete Idea
+          </button>
         </FormWrapper>
       )
     })
@@ -99,7 +127,7 @@ class IdeaPage extends Component {
       <div>
         <div>
           <h1>{this.state.user.userName}'s Idea Board</h1>
-          <StyledButton onClick={this.createIdea}>New Idea</StyledButton>
+          <StyledButton onClick={this.createNewIdea}>New Idea</StyledButton>
         </div>
         <IdeaContainer>
           {ideas}
@@ -108,6 +136,5 @@ class IdeaPage extends Component {
     )
   }
 }
-   
 
 export default IdeaPage
