@@ -26,8 +26,9 @@ app.get('/', (req, res) => {
 const UsersController = require('./controllers/users')
 app.use('/api/users', UsersController)
 
+
 const IdeasController = require('./controllers/ideas')
-app.use('/api/users/:userid/ideas', UsersController)
+app.use('/api/users/:userId/ideas', IdeasController)
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
