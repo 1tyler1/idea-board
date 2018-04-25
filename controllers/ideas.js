@@ -17,5 +17,20 @@ router.post('/', (req, res) => {
       console.error(err)
     })
 })
+router.delete('/', (req, res) => {
+
+    User.findById(req.params.userId)
+    .then((user) => {
+        user.update({
+            $pull:
+            { ideas: {_id: req.params.id} }
+        })
+        .then((data) => {
+            res.sendStatus(200)
+        })
+        .catch(console.error)
+    })
+    .catch(console.error)
+});
 
 module.exports = router

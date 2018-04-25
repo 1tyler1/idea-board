@@ -67,13 +67,30 @@ class IdeaPage extends Component {
       })
   }
 
+  createIdea = () => {
+    axios.post(`/api/users/${this.state.user._id}/ideas`)
+    .then(res => {
+      const newIdeas = [...this.state.ideas]
+      newIdeas.unshift(res.data) 
+      //This will add the new Idea to the beginning of the array
+      this.setState({ideas: newIdeas})
+    })
+  }
+
+  deleteIdea = (ideaId) => {
+    axios.delete(`/api/users/${this.state.user._id}/ideas/${ideaId}`)
+      .then((res) => {
+        console.log(res)
+    })
+    
+  } 
   render() {
     const ideas = this.state.ideas.map((idea, i) => {
       return (
         <FormWrapper key={i}>
           <input type="text" name="title" value={idea.title} onChange={this.handleChange} />
           <textarea name="description" value={idea.description} onChange={this.handleChange} />
-          <button>Delete Idea</button>
+          <button onClick={this.deleteIdea}>Delete Idea</button>
         </FormWrapper>
       )
     })
@@ -82,7 +99,7 @@ class IdeaPage extends Component {
       <div>
         <div>
           <h1>{this.state.user.userName}'s Idea Board</h1>
-          <StyledButton>New Idea</StyledButton>
+          <StyledButton onClick={this.createIdea}>New Idea</StyledButton>
         </div>
         <IdeaContainer>
           {ideas}
