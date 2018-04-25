@@ -6,10 +6,9 @@ const FormWrapper = styled.div`
   
   display: flex;
   flex-direction: column;
-  
   border-radius: 3px;
-  padding: 0.5rem 0;
-  margin: 0.5rem 1rem;
+  padding: 5px 5px 5px 5px;
+  margin: 5px 5px 5px 5px;
   width: 11rem;
   background: yellow;
   color: white;
@@ -22,8 +21,6 @@ const FormWrapper = styled.div`
 const StyledButton = styled.button`
 background-color: #123456;
 color: white;
-    background-color: #123456;
-    color: white;
 `
 const IdeaContainer = styled.span`
 background-color:yellow;
@@ -82,9 +79,10 @@ class IdeaPage extends Component {
       })
   }
 
-  updateIdea = (idea, e) => {
-    axios.patch(`/api/users/${this.state.user.id}/ideas/${idea._id}`, {idea}).then(res => {
-      this.setState({ideas: res.data.ideas})
+  updateIdea = (ideaId) => {
+    axios.patch(`/api/users/${this.state.user.id}/ideas/${ideaId}`)
+    .then(res => 
+      {this.setState({ideas: res.data.ideas})
     })
   }
 
@@ -108,15 +106,17 @@ class IdeaPage extends Component {
             type="text"
             name="title"
             value={idea.title}
-            onChange={(event) => this.handleChange(idea, event)} />
+            onChange={(event) => this.handleChange(idea, event)} 
+            onBlur={() => {this.updateIdea(idea)}}/>
 
           <textarea
             name="description"
             value={idea.description}
-            onChange={(event) => this.handleChange(idea, event)} />
+            onChange={(event) => {this.handleChange(idea, event)}}
+            onBlur={(ideaId) => {this.updateIdea(idea._id)}}/>
 
           <button
-            onClick={() => { this.deleteIdea(idea._id) }}>
+            onClick={(ideaId) => { this.deleteIdea(idea._id) }}>
             Delete Idea
           </button>
         </FormWrapper>
@@ -127,7 +127,10 @@ class IdeaPage extends Component {
       <div>
         <div>
           <h1>{this.state.user.userName}'s Idea Board</h1>
-          <StyledButton onClick={this.createNewIdea}>New Idea</StyledButton>
+          <StyledButton 
+          onClick={this.createNewIdea}>
+          New Idea
+          </StyledButton>
         </div>
         <IdeaContainer>
           {ideas}
